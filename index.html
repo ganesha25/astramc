@@ -109,7 +109,7 @@
             <li>Extra homes + fast RTP</li>
             <li>Survival priority queue</li>
           </ul>
-          <!-- yaha se update -->
+          <!-- Invite copy -->
           <button class="btn btn-primary" onclick="copyDiscord()">Invite Friends →</button>
         </article>
 
@@ -128,7 +128,7 @@
             <li>Exclusive Astra crates</li>
             <li>Event leader status</li>
           </ul>
-          <!-- direct Discord join -->
+          <!-- Direct Discord -->
           <button class="btn btn-glow" onclick="openDiscord()">Watch Events →</button>
         </article>
       </div>
@@ -168,11 +168,11 @@
       <div class="info-card">
         <h2 class="section-title">Live Online Players Monitor</h2>
         <p class="section-sub">
-          Real‑time feel ke liye ek futuristic panel jo dikhata hai kitne players online hain aur unke naam. (Naam example data se – backend lagao to API se aa jayega.) [web:50]
+          Ye panel mcsrvstat API se real‑time data fetch karke dikhata hai kitne players online hain aur unke naam. [web:61][web:69]
         </p>
 
+        <!-- Extra CSS only for this monitor -->
         <style>
-          /* extra small CSS sirf is monitor ke liye */
           .players-dashboard {
             display: grid;
             grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -226,9 +226,7 @@
             transform: translateX(-100%);
             animation: sweep 3s linear infinite;
           }
-          @keyframes sweep {
-            to { transform: translateX(100%); }
-          }
+          @keyframes sweep { to { transform: translateX(100%); } }
           .players-list {
             background: rgba(10,10,16,0.96);
             border-radius: 16px;
@@ -259,13 +257,8 @@
             margin-bottom: 4px;
             background: rgba(18,18,30,0.9);
           }
-          .player-name {
-            font-size: 0.9rem;
-          }
-          .player-ping {
-            font-size: 0.78rem;
-            opacity: 0.8;
-          }
+          .player-name { font-size: 0.9rem; }
+          .player-ping { font-size: 0.78rem; opacity: 0.8; }
           .player-rank-pill {
             font-size: 0.7rem;
             padding: 3px 8px;
@@ -274,9 +267,7 @@
             background: rgba(255,122,60,0.14);
           }
           @media (max-width: 800px) {
-            .players-dashboard {
-              grid-template-columns: 1fr;
-            }
+            .players-dashboard { grid-template-columns: 1fr; }
           }
         </style>
 
@@ -286,16 +277,16 @@
             <div class="players-kpi-top">
               <div>
                 <span class="players-pulse">ASTRAMC • Live Status</span>
-                <div class="players-count" id="players-count">12</div>
+                <div class="players-count" id="players-count">--</div>
               </div>
-              <div class="players-status-dot"></div>
+              <div class="players-status-dot" id="players-status-dot"></div>
             </div>
             <p style="font-size:0.85rem; opacity:0.85;">
-              IP: <code>astramc.us.to</code> • Estimated capacity ~100 slots • Status: <strong>Online</strong>.
+              IP: <code>astramc.us.to</code> • Capacity estimate • Status: <strong id="server-status-text">Checking…</strong>
             </p>
             <div class="players-graph-bar"></div>
             <p style="font-size:0.8rem; opacity:0.8;">
-              Note: Data abhi demo hai. Apna backend / API lagao to yahi panel real‑time ho jayega. [web:31]
+              Data free public API se aa raha hai (mcsrvstat). Agar offline dikhe to thodi der baad refresh try karo. [web:61][web:69]
             </p>
           </div>
 
@@ -303,48 +294,106 @@
           <div class="players-list">
             <div class="players-list-header">
               <span style="font-size:0.9rem; opacity:0.85;">Currently Online</span>
-              <span style="font-size:0.78rem; opacity:0.7;" id="players-refresh-label">Demo Data</span>
+              <span style="font-size:0.78rem; opacity:0.7;" id="players-refresh-label">Live</span>
             </div>
             <div class="players-scroll" id="players-list">
-              <!-- Example rows (static demo) -->
-              <div class="player-row">
-                <span class="player-name">xAstraOwner</span>
-                <span class="player-rank-pill">ASTRA</span>
-                <span class="player-ping">42 ms</span>
-              </div>
-              <div class="player-row">
-                <span class="player-name">ShadowEagle</span>
-                <span class="player-rank-pill">EAGLE</span>
-                <span class="player-ping">57 ms</span>
-              </div>
-              <div class="player-row">
-                <span class="player-name">VIPPratham</span>
-                <span class="player-rank-pill">VIP</span>
-                <span class="player-ping">73 ms</span>
-              </div>
-              <div class="player-row">
-                <span class="player-name">ClutchGod</span>
-                <span class="player-rank-pill">PLAYER</span>
-                <span class="player-ping">88 ms</span>
-              </div>
-              <div class="player-row">
-                <span class="player-name">TotemFarmer</span>
-                <span class="player-rank-pill">PLAYER</span>
-                <span class="player-ping">66 ms</span>
-              </div>
+              <!-- JS se fill hoga -->
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- RULES SECTION (same as before) -->
-    <!-- ... yaha tumhara previous RULES + SMP LOGO sections same hi rakho (koi change nahi) ... -->
+    <!-- RULES SECTION -->
+    <section id="rules" class="info-section">
+      <div class="info-card">
+        <h2 class="section-title">ASTRAMC Network Rules</h2>
+        <p class="section-sub">
+          Simple rules follow karo → sabke liye safe, chill aur fair SMP experience banta hai. [web:29][web:30]
+        </p>
 
-    <!-- SMP LOGOS SECTION etc. -->
-    <!-- (use the exact blocks I gave in last message) -->
-    <!-- ---------- -->
-    <!-- IMPORTANT: niche footer same rahega -->
+        <div class="rules-banner" style="margin-bottom:16px; text-align:center;">
+          <img src="unnamed_1.jpg"
+               alt="AstraMC Network Rules Banner"
+               style="max-width:100%; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.8);">
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <h3>I. Respect Above Everything</h3>
+            <p>Sab players ke saath respect & kindness se baat karo; no toxic behaviour, no ego, no hate.</p>
+            <p>Targeting, bullying, harassment, personal attacks ya abuse = instant mute/warn/ban.</p>
+          </div>
+
+          <div class="step-card">
+            <h3>II. Clean Communication</h3>
+            <p>No spam, ear‑rape, NSFW, racist/sexist slurs ya hate speech in chat, signs ya builds. [web:32]</p>
+            <p>Sirf allowed languages, correct channels use karo; staff ke instructions hamesha follow karo.</p>
+          </div>
+
+          <div class="step-card">
+            <h3>III. Security & Privacy First</h3>
+            <p>Apna ya kisi aur ka real‑life info (address, number, passwords, OTP etc.) kabhi share mat karo. [web:37]</p>
+            <p>Hacking, phishing, scamming, dupes, exploiting bugs ya illegal clients = straight ban.</p>
+          </div>
+
+          <div class="step-card">
+            <h3>IV. Smart & Fair Usage</h3>
+            <p>X‑ray, hacked clients, macros, autoclickers, lag machines, afk farms jo server ko damage kare, allowed nahi. [web:36]</p>
+            <p>Griefing, stealing, tp‑trapping, scamming trades, spawn‑killing repeatedly strictly forbidden.</p>
+          </div>
+
+          <div class="step-card">
+            <h3>V. Discord / Platform Rules</h3>
+            <p>Discord Terms of Service & Community Guidelines automatically server par apply hote hain. [web:32][web:39]</p>
+            <p>Ignorance of rules = excuse nahi; staff ka final decision hamesha respected hoga.</p>
+          </div>
+
+          <div class="step-card">
+            <h3>VI. Punishment System</h3>
+            <p>Normal flow: Warning → Mute/Kick → Temporary Ban → Permanent Ban (serious cases me direct ban).</p>
+            <p>Agar tum rules ignore karoge to tumhe events, giveaways, ranks se bhi blacklist kiya ja sakta hai.</p>
+          </div>
+        </div>
+
+        <div class="info-note">
+          <strong>Note:</strong> Rules kabhi bhi update ho sakte hain; latest version hamesha Discord
+          <code>#rules</code> channel me pinned rahega. [web:30]
+        </div>
+      </div>
+    </section>
+
+    <!-- SMP LOGOS SECTION -->
+    <section id="smp" class="info-section">
+      <div class="info-card">
+        <h2 class="section-title">AstraMC SMP Logos</h2>
+        <p class="section-sub">
+          Ye official AstraMC branding assets hain – website, Discord ya thumbnails me use kar sakte ho.
+        </p>
+
+        <div class="steps-grid">
+          <div class="step-card" style="text-align:center;">
+            <h3>Main Text Logo</h3>
+            <img src="astramctex.jpg"
+                 alt="AstraMC Text Logo"
+                 style="max-width:100%; border-radius:12px; margin-top:8px;">
+            <p style="margin-top:8px; font-size:0.85rem;">
+              High‑res text logo – best for website header, server lists aur large banners.
+            </p>
+          </div>
+
+          <div class="step-card" style="text-align:center;">
+            <h3>Icon Logo</h3>
+            <img src="astramclogo-with-border.jpg"
+                 alt="AstraMC Icon Logo"
+                 style="max-width:80%; border-radius:18px; margin-top:8px;">
+            <p style="margin-top:8px; font-size:0.85rem;">
+              Square icon – Discord server icon, favicon, launcher & profile pictures ke liye perfect.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- FOOTER -->
@@ -355,11 +404,12 @@
 
   <script>
     const DISCORD_INVITE = 'https://discord.gg/uX3ejmmVDf';
+    const STATUS_API = 'https://api.mcsrvstat.us/2/astramc.us.to'; // JSON with players + list [web:61][web:69]
 
     // Auto year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Copy IP function
+    // Copy IP
     function copyIP() {
       navigator.clipboard.writeText('astramc.us.to').then(() => {  // [web:58]
         const btn = event.target;
@@ -387,7 +437,7 @@
       });
     }
 
-    // Open Discord server directly (new tab)
+    // Open Discord server directly
     function openDiscord() {
       window.open(DISCORD_INVITE, '_blank');  // [web:51]
     }
@@ -400,11 +450,79 @@
       document.getElementById('how').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Make all IP tags clickable
+    // All IP tags clickable
     document.querySelectorAll('.copy-ip').forEach(el => {
       el.style.cursor = 'pointer';
       el.addEventListener('click', copyIP);
     });
+
+    // --- Live player monitor using mcsrvstat API ---
+    async function fetchStatus() {
+      const countEl = document.getElementById('players-count');
+      const listEl = document.getElementById('players-list');
+      const statusDot = document.getElementById('players-status-dot');
+      const statusText = document.getElementById('server-status-text');
+
+      try {
+        const res = await fetch(STATUS_API, { cache: 'no-store' }); // [web:61][web:69]
+        const data = await res.json();
+
+        if (!data || data.online === false) {
+          countEl.textContent = '--';
+          statusText.textContent = 'Offline';
+          statusDot.style.background = '#ef4444';
+          statusDot.style.boxShadow = '0 0 14px rgba(239,68,68,0.9)';
+          listEl.innerHTML = '<p style="font-size:0.82rem; opacity:0.8;">Server offline ya API reachable nahi hai.</p>';
+          return;
+        }
+
+        const online = data.players?.online ?? 0;
+        const max = data.players?.max ?? 0;
+        const list = data.players?.list || data.players?.sample || []; // API variant support [web:66][web:72]
+
+        countEl.textContent = online.toString().padStart(2, '0');
+        statusText.textContent = 'Online (' + online + '/' + max + ')';
+        statusDot.style.background = '#22c55e';
+        statusDot.style.boxShadow = '0 0 14px rgba(34,197,94,0.9)';
+
+        if (!list.length) {
+          listEl.innerHTML = '<p style="font-size:0.82rem; opacity:0.8;">Server online hai but player list hidden / empty.</p>';
+        } else {
+          listEl.innerHTML = '';
+          list.forEach(p => {
+            const name = typeof p === 'string' ? p : p.name;
+            const row = document.createElement('div');
+            row.className = 'player-row';
+
+            const left = document.createElement('span');
+            left.className = 'player-name';
+            left.textContent = name;
+
+            const mid = document.createElement('span');
+            mid.className = 'player-rank-pill';
+            mid.textContent = 'PLAYER';
+
+            const right = document.createElement('span');
+            right.className = 'player-ping';
+            right.textContent = '~?? ms';
+
+            row.appendChild(left);
+            row.appendChild(mid);
+            row.appendChild(right);
+            listEl.appendChild(row);
+          });
+        }
+      } catch (e) {
+        countEl.textContent = '--';
+        statusText.textContent = 'Error';
+        statusDot.style.background = '#f97316';
+        statusDot.style.boxShadow = '0 0 14px rgba(249,115,22,0.9)';
+        listEl.innerHTML = '<p style="font-size:0.82rem; opacity:0.8;">Status fetch error. Thodi der baad reload karo.</p>';
+      }
+    }
+
+    fetchStatus();
+    setInterval(fetchStatus, 30000); // 30s refresh [web:77]
   </script>
 </body>
 </html>
