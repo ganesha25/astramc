@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AstraMC Network Store</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Background decoration -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <header class="nav">
+    <div class="nav-left">
+      <div class="logo-circle">
+        <span class="logo-text">A</span>
+      </div>
+      <div class="brand">
+        <h1>AstraMC</h1>
+        <p>Network Store</p>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="#ranks" class="nav-link">Ranks</a>
+      <a href="#info" class="nav-link">How to Buy</a>
+      <a href="https://github.com/" target="_blank" class="nav-link">GitHub</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-text">
+        <h2>AstraMC Network Store</h2>
+        <p class="hero-sub">
+          Upgrade your vibes with premium ranks on our <span class="highlight">3D Minecraft</span> server.
+          Orange–red galaxy theme, no pay-to-win pressure.
+        </p>
+        <div class="hero-tags">
+          <span class="tag">IP: <strong>astramc.us.to</strong></span>
+          <span class="tag">Gamemodes: Lifesteal · Survival · Practice</span>
+          <span class="tag">No P2W • Community First</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <p class="hero-label">Featured Rank</p>
+          <h3 class="hero-rank">ASTRA</h3>
+          <p class="hero-desc">Cosmic level flex with max perks, effects and priority everywhere.</p>
+          <button class="btn btn-primary">View Ranks</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ranks Section -->
+    <section id="ranks" class="ranks-section">
+      <h2 class="section-title">Ranks</h2>
+      <p class="section-sub">
+        Choose your rank. Visual flex, QoL perks, particles and more. Prices are examples – tune later.
+      </p>
+
+      <div class="ranks-grid">
+        <!-- VIP Rank -->
+        <article class="rank-card rank-vip">
+          <div class="rank-header">
+            <span class="rank-label">Starter Rank</span>
+            <h3>VIP</h3>
+          </div>
+          <p class="rank-price">₹99 / one-time</p>
+          <ul class="rank-perks">
+            <li>VIP name color + chat tag</li>
+            <li>Basic /hat, /nick (limited)</li>
+            <li>Join full server access</li>
+            <li>Small loot boosts in crates</li>
+          </ul>
+          <button class="btn btn-outline">Buy via Discord</button>
+        </article>
+
+        <!-- Eagle Rank -->
+        <article class="rank-card rank-eagle">
+          <div class="rank-header">
+            <span class="rank-label">Popular</span>
+            <h3>EAGLE</h3>
+          </div>
+          <p class="rank-price">₹249 / one-time</p>
+          <ul class="rank-perks">
+            <li>All VIP perks included</li>
+            <li>Exclusive Eagle tag & particles</li>
+            <li>/feed, /workbench, /craft</li>
+            <li>Extra homes & RTP cooldown cuts</li>
+          </ul>
+          <button class="btn btn-primary">Discord Purchase</button>
+        </article>
+
+        <!-- Astra Rank -->
+        <article class="rank-card rank-astra">
+          <div class="rank-header">
+            <span class="rank-label">Legendary</span>
+            <h3>ASTRA</h3>
+          </div>
+          <p class="rank-price">₹499 / one-time</p>
+          <ul class="rank-perks">
+            <li>All Eagle + VIP perks</li>
+            <li>Cosmic aura, trails & pets</li>
+            <li>Highest queue & support priority</li>
+            <li>Special Astra-only events & crate</li>
+          </ul>
+          <button class="btn btn-glow">Contact Staff</button>
+        </article>
+      </div>
+    </section>
+
+    <!-- Info / How to Buy -->
+    <section id="info" class="info-section">
+      <div class="info-card">
+        <h2 class="section-title">How to Purchase</h2>
+        <p class="section-sub">
+          For now, payments are handled safely via staff only. No direct card details on this site.
+        </p>
+        <ol class="info-steps">
+          <li>Join our Discord server (link on main AstraMC banner/site).</li>
+          <li>Open a ticket in <strong>#support</strong> or <strong>#store</strong>.</li>
+          <li>Tell staff your IGN, rank you want (VIP / Eagle / Astra) and gamemode.</li>
+          <li>Staff will share official payment methods & confirm delivery in-game.</li>
+        </ol>
+        <p class="info-note">
+          Never pay anyone outside official AstraMC staff or outside official channels.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> AstraMC Network • astramc.us.to • All rights reserved.</p>
+    <p class="footer-small">Hosted via GitHub + Render • Designed for Minecraft players.</p>
+  </footer>
+
+  <script>
+    // Auto year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
