@@ -34,6 +34,7 @@
       <a href="#ranks" class="nav-link">Free Ranks</a>
       <a href="#how" class="nav-link">How to Get</a>
       <a href="#rules" class="nav-link">Rules</a>
+      <a href="#players" class="nav-link">Online Players</a>
       <a href="#smp" class="nav-link">SMP Logos</a>
     </div>
   </header>
@@ -108,7 +109,8 @@
             <li>Extra homes + fast RTP</li>
             <li>Survival priority queue</li>
           </ul>
-          <button class="btn btn-primary">Invite Friends →</button>
+          <!-- yaha se update -->
+          <button class="btn btn-primary" onclick="copyDiscord()">Invite Friends →</button>
         </article>
 
         <!-- ASTRA -->
@@ -126,7 +128,8 @@
             <li>Exclusive Astra crates</li>
             <li>Event leader status</li>
           </ul>
-          <button class="btn btn-glow">Watch Events →</button>
+          <!-- direct Discord join -->
+          <button class="btn btn-glow" onclick="openDiscord()">Watch Events →</button>
         </article>
       </div>
     </section>
@@ -160,129 +163,188 @@
       </div>
     </section>
 
-    <!-- RULES SECTION -->
-    <section id="rules" class="info-section">
+    <!-- ONLINE PLAYERS FUTURISTIC MONITOR -->
+    <section id="players" class="info-section">
       <div class="info-card">
-        <h2 class="section-title">ASTRAMC Network Rules</h2>
+        <h2 class="section-title">Live Online Players Monitor</h2>
         <p class="section-sub">
-          Simple rules follow karo → sabke liye safe, chill aur fair SMP experience banta hai. [web:29][web:30]
+          Real‑time feel ke liye ek futuristic panel jo dikhata hai kitne players online hain aur unke naam. (Naam example data se – backend lagao to API se aa jayega.) [web:50]
         </p>
 
-        <!-- Rules banner image -->
-        <div class="rules-banner" style="margin-bottom:16px; text-align:center;">
-          <img src="unnamed_1.jpg"
-               alt="AstraMC Network Rules Banner"
-               style="max-width:100%; border-radius:14px; box-shadow:0 12px 30px rgba(0,0,0,0.8);">
-        </div>
+        <style>
+          /* extra small CSS sirf is monitor ke liye */
+          .players-dashboard {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 18px;
+            margin-top: 16px;
+          }
+          .players-kpi {
+            background: linear-gradient(135deg, rgba(255,122,60,0.18), rgba(5,5,9,0.95));
+            border-radius: 16px;
+            padding: 16px 18px;
+            border: 1px solid rgba(255,212,71,0.35);
+            box-shadow: 0 16px 34px rgba(0,0,0,0.85);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          }
+          .players-kpi-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .players-count {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+          }
+          .players-status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 14px rgba(34,197,94,0.9);
+          }
+          .players-pulse {
+            font-size: 0.78rem;
+            opacity: 0.8;
+          }
+          .players-graph-bar {
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(34,197,94,0.15), rgba(34,197,94,0.9));
+            overflow: hidden;
+            position: relative;
+          }
+          .players-graph-bar::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255,255,255,0.3), transparent 60%);
+            mix-blend-mode: screen;
+            transform: translateX(-100%);
+            animation: sweep 3s linear infinite;
+          }
+          @keyframes sweep {
+            to { transform: translateX(100%); }
+          }
+          .players-list {
+            background: rgba(10,10,16,0.96);
+            border-radius: 16px;
+            padding: 14px 14px 6px;
+            border: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 0 16px 34px rgba(0,0,0,0.9);
+            max-height: 220px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+          }
+          .players-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+          }
+          .players-scroll {
+            overflow-y: auto;
+            padding-right: 4px;
+          }
+          .player-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 4px;
+            border-radius: 8px;
+            margin-bottom: 4px;
+            background: rgba(18,18,30,0.9);
+          }
+          .player-name {
+            font-size: 0.9rem;
+          }
+          .player-ping {
+            font-size: 0.78rem;
+            opacity: 0.8;
+          }
+          .player-rank-pill {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,212,71,0.55);
+            background: rgba(255,122,60,0.14);
+          }
+          @media (max-width: 800px) {
+            .players-dashboard {
+              grid-template-columns: 1fr;
+            }
+          }
+        </style>
 
-        <div class="steps-grid">
-          <!-- Section 1 -->
-          <div class="step-card">
-            <h3>I. Respect Above Everything</h3>
-            <p>
-              Sab players ke saath respect & kindness se baat karo; no toxic behaviour, no ego, no hate.
+        <div class="players-dashboard">
+          <!-- big count card -->
+          <div class="players-kpi">
+            <div class="players-kpi-top">
+              <div>
+                <span class="players-pulse">ASTRAMC • Live Status</span>
+                <div class="players-count" id="players-count">12</div>
+              </div>
+              <div class="players-status-dot"></div>
+            </div>
+            <p style="font-size:0.85rem; opacity:0.85;">
+              IP: <code>astramc.us.to</code> • Estimated capacity ~100 slots • Status: <strong>Online</strong>.
             </p>
-            <p>
-              Targeting, bullying, harassment, personal attacks ya abuse = instant mute/warn/ban.
+            <div class="players-graph-bar"></div>
+            <p style="font-size:0.8rem; opacity:0.8;">
+              Note: Data abhi demo hai. Apna backend / API lagao to yahi panel real‑time ho jayega. [web:31]
             </p>
           </div>
 
-          <!-- Section 2 -->
-          <div class="step-card">
-            <h3>II. Clean Communication</h3>
-            <p>
-              No spam, ear‑rape, caps spam, NSFW, racist/sexist slurs ya hate speech in chat, signs ya builds. [web:32]
-            </p>
-            <p>
-              Sirf allowed languages, correct channels use karo; staff ke instructions hamesha follow karo.
-            </p>
+          <!-- names list card -->
+          <div class="players-list">
+            <div class="players-list-header">
+              <span style="font-size:0.9rem; opacity:0.85;">Currently Online</span>
+              <span style="font-size:0.78rem; opacity:0.7;" id="players-refresh-label">Demo Data</span>
+            </div>
+            <div class="players-scroll" id="players-list">
+              <!-- Example rows (static demo) -->
+              <div class="player-row">
+                <span class="player-name">xAstraOwner</span>
+                <span class="player-rank-pill">ASTRA</span>
+                <span class="player-ping">42 ms</span>
+              </div>
+              <div class="player-row">
+                <span class="player-name">ShadowEagle</span>
+                <span class="player-rank-pill">EAGLE</span>
+                <span class="player-ping">57 ms</span>
+              </div>
+              <div class="player-row">
+                <span class="player-name">VIPPratham</span>
+                <span class="player-rank-pill">VIP</span>
+                <span class="player-ping">73 ms</span>
+              </div>
+              <div class="player-row">
+                <span class="player-name">ClutchGod</span>
+                <span class="player-rank-pill">PLAYER</span>
+                <span class="player-ping">88 ms</span>
+              </div>
+              <div class="player-row">
+                <span class="player-name">TotemFarmer</span>
+                <span class="player-rank-pill">PLAYER</span>
+                <span class="player-ping">66 ms</span>
+              </div>
+            </div>
           </div>
-
-          <!-- Section 3 -->
-          <div class="step-card">
-            <h3>III. Security & Privacy First</h3>
-            <p>
-              Apna ya kisi aur ka real‑life info (address, number, passwords, OTP etc.) kabhi share mat karo. [web:37]
-            </p>
-            <p>
-              Hacking, phishing, scamming, dupes, exploiting bugs ya illegal clients = straight ban.
-            </p>
-          </div>
-
-          <!-- Section 4 -->
-          <div class="step-card">
-            <h3>IV. Smart & Fair Usage</h3>
-            <p>
-              X‑ray, hacked clients, macros, autoclickers, lag machines, afk farms jo server ko damage kare, allowed nahi. [web:36]
-            </p>
-            <p>
-              Griefing, stealing, tp‑trapping, scamming trades, spawn‑killing repeatedly strictly forbidden.
-            </p>
-          </div>
-
-          <!-- Section 5 -->
-          <div class="step-card">
-            <h3>V. Discord / Platform Rules</h3>
-            <p>
-              Discord Terms of Service & Community Guidelines automatically server par apply hote hain. [web:32][web:39]
-            </p>
-            <p>
-              Ignorance of rules = excuse nahi; staff ka final decision hamesha respected hoga.
-            </p>
-          </div>
-
-          <!-- Section 6 -->
-          <div class="step-card">
-            <h3>VI. Punishment System</h3>
-            <p>
-              Normal flow: Warning → Mute/Kick → Temporary Ban → Permanent Ban (serious cases me direct ban).
-            </p>
-            <p>
-              Agar tum rules ignore karoge to tumhe events, giveaways, ranks se bhi blacklist kiya ja sakta hai.
-            </p>
-          </div>
-        </div>
-
-        <div class="info-note">
-          <strong>Note:</strong> Rules kabhi bhi update ho sakte hain; latest version hamesha Discord
-          <code>#rules</code> channel me pinned rahega. [web:30]
         </div>
       </div>
     </section>
 
-    <!-- SMP LOGOS SECTION -->
-    <section id="smp" class="info-section">
-      <div class="info-card">
-        <h2 class="section-title">AstraMC SMP Logos</h2>
-        <p class="section-sub">
-          Ye official AstraMC branding assets hain – website, Discord ya thumbnails me use kar sakte ho.
-        </p>
+    <!-- RULES SECTION (same as before) -->
+    <!-- ... yaha tumhara previous RULES + SMP LOGO sections same hi rakho (koi change nahi) ... -->
 
-        <div class="steps-grid">
-          <!-- Logo 1: full text -->
-          <div class="step-card" style="text-align:center;">
-            <h3>Main Text Logo</h3>
-            <img src="astramctex.jpg"
-                 alt="AstraMC Text Logo"
-                 style="max-width:100%; border-radius:12px; margin-top:8px;">
-            <p style="margin-top:8px; font-size:0.85rem;">
-              High‑res text logo – best for website header, server lists aur large banners.
-            </p>
-          </div>
-
-          <!-- Logo 2: trident / icon -->
-          <div class="step-card" style="text-align:center;">
-            <h3>Icon Logo</h3>
-            <img src="astramclogo-with-border.jpg"
-                 alt="AstraMC Icon Logo"
-                 style="max-width:80%; border-radius:18px; margin-top:8px;">
-            <p style="margin-top:8px; font-size:0.85rem;">
-              Square icon – Discord server icon, favicon, launcher & profile pictures ke liye perfect.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <!-- SMP LOGOS SECTION etc. -->
+    <!-- (use the exact blocks I gave in last message) -->
+    <!-- ---------- -->
+    <!-- IMPORTANT: niche footer same rahega -->
   </main>
 
   <!-- FOOTER -->
@@ -292,12 +354,14 @@
   </footer>
 
   <script>
+    const DISCORD_INVITE = 'https://discord.gg/uX3ejmmVDf';
+
     // Auto year
     document.getElementById('year').textContent = new Date().getFullYear();
 
     // Copy IP function
     function copyIP() {
-      navigator.clipboard.writeText('astramc.us.to').then(() => {
+      navigator.clipboard.writeText('astramc.us.to').then(() => {  // [web:58]
         const btn = event.target;
         const original = btn.innerHTML;
         btn.innerHTML = '✅ IP Copied!';
@@ -307,6 +371,25 @@
           btn.style.background = '';
         }, 2000);
       });
+    }
+
+    // Copy Discord invite link
+    function copyDiscord() {
+      navigator.clipboard.writeText(DISCORD_INVITE).then(() => {  // [web:58]
+        const btn = event.target;
+        const original = btn.innerHTML;
+        btn.innerHTML = '✅ Invite Copied!';
+        btn.style.backgroundImage = 'linear-gradient(120deg,#22c55e,#4ade80)';
+        setTimeout(() => {
+          btn.innerHTML = original;
+          btn.style.backgroundImage = '';
+        }, 2000);
+      });
+    }
+
+    // Open Discord server directly (new tab)
+    function openDiscord() {
+      window.open(DISCORD_INVITE, '_blank');  // [web:51]
     }
 
     // Scroll helpers
