@@ -109,7 +109,6 @@
             <li>Extra homes + fast RTP</li>
             <li>Survival priority queue</li>
           </ul>
-          <!-- Invite copy -->
           <button class="btn btn-primary" onclick="copyDiscord()">Invite Friends →</button>
         </article>
 
@@ -128,7 +127,6 @@
             <li>Exclusive Astra crates</li>
             <li>Event leader status</li>
           </ul>
-          <!-- Direct Discord -->
           <button class="btn btn-glow" onclick="openDiscord()">Watch Events →</button>
         </article>
       </div>
@@ -168,10 +166,9 @@
       <div class="info-card">
         <h2 class="section-title">Live Online Players Monitor</h2>
         <p class="section-sub">
-          Ye panel mcsrvstat API se real‑time data fetch karke dikhata hai kitne players online hain aur unke naam. [web:61][web:69]
+          mcstatus.io v2 API se real‑time player count aur names fetch ho rahe hain. [web:64][web:94]
         </p>
 
-        <!-- Extra CSS only for this monitor -->
         <style>
           .players-dashboard {
             display: grid;
@@ -282,11 +279,11 @@
               <div class="players-status-dot" id="players-status-dot"></div>
             </div>
             <p style="font-size:0.85rem; opacity:0.85;">
-              IP: <code>astramc.us.to</code> • Capacity estimate • Status: <strong id="server-status-text">Checking…</strong>
+              IP: <code>astramc.us.to</code> • Status: <strong id="server-status-text">Checking…</strong>
             </p>
             <div class="players-graph-bar"></div>
             <p style="font-size:0.8rem; opacity:0.8;">
-              Data free public API se aa raha hai (mcsrvstat). Agar offline dikhe to thodi der baad refresh try karo. [web:61][web:69]
+              Agar server offline ho ya API down ho to yaha "--" dikhega; kuch second baad auto refresh hoga. [web:64]
             </p>
           </div>
 
@@ -404,7 +401,8 @@
 
   <script>
     const DISCORD_INVITE = 'https://discord.gg/uX3ejmmVDf';
-    const STATUS_API = 'https://api.mcsrvstat.us/2/astramc.us.to'; // JSON with players + list [web:61][web:69]
+    // mcstatus.io v2 Java endpoint – JSON structure: { online, players: { online, max, list: [{name, uuid}] } } [web:64]
+    const STATUS_API = 'https://api.mcstatus.io/v2/status/java/astramc.us.to';
 
     // Auto year
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -423,7 +421,7 @@
       });
     }
 
-    // Copy Discord invite link
+    // Copy Discord invite
     function copyDiscord() {
       navigator.clipboard.writeText(DISCORD_INVITE).then(() => {  // [web:58]
         const btn = event.target;
@@ -437,7 +435,7 @@
       });
     }
 
-    // Open Discord server directly
+    // Open Discord
     function openDiscord() {
       window.open(DISCORD_INVITE, '_blank');  // [web:51]
     }
@@ -456,7 +454,7 @@
       el.addEventListener('click', copyIP);
     });
 
-    // --- Live player monitor using mcsrvstat API ---
+    // Live player monitor using mcstatus.io v2
     async function fetchStatus() {
       const countEl = document.getElementById('players-count');
       const listEl = document.getElementById('players-list');
@@ -464,7 +462,7 @@
       const statusText = document.getElementById('server-status-text');
 
       try {
-        const res = await fetch(STATUS_API, { cache: 'no-store' }); // [web:61][web:69]
+        const res = await fetch(STATUS_API, { cache: 'no-store' }); // [web:64]
         const data = await res.json();
 
         if (!data || data.online === false) {
@@ -472,13 +470,13 @@
           statusText.textContent = 'Offline';
           statusDot.style.background = '#ef4444';
           statusDot.style.boxShadow = '0 0 14px rgba(239,68,68,0.9)';
-          listEl.innerHTML = '<p style="font-size:0.82rem; opacity:0.8;">Server offline ya API reachable nahi hai.</p>';
+          listEl.innerHTML = '<p style="font-size:0.82rem; opacity:0.8;">Server offline ya status available nahi hai.</p>';
           return;
         }
 
         const online = data.players?.online ?? 0;
         const max = data.players?.max ?? 0;
-        const list = data.players?.list || data.players?.sample || []; // API variant support [web:66][web:72]
+        const list = data.players?.list || []; // [{name, uuid}] [web:64]
 
         countEl.textContent = online.toString().padStart(2, '0');
         statusText.textContent = 'Online (' + online + '/' + max + ')';
@@ -490,13 +488,12 @@
         } else {
           listEl.innerHTML = '';
           list.forEach(p => {
-            const name = typeof p === 'string' ? p : p.name;
             const row = document.createElement('div');
             row.className = 'player-row';
 
             const left = document.createElement('span');
             left.className = 'player-name';
-            left.textContent = name;
+            left.textContent = p.name;
 
             const mid = document.createElement('span');
             mid.className = 'player-rank-pill';
@@ -504,7 +501,7 @@
 
             const right = document.createElement('span');
             right.className = 'player-ping';
-            right.textContent = '~?? ms';
+            right.textContent = '#' + p.uuid.substring(0, 4); // fake ping info style
 
             row.appendChild(left);
             row.appendChild(mid);
@@ -522,7 +519,7 @@
     }
 
     fetchStatus();
-    setInterval(fetchStatus, 30000); // 30s refresh [web:77]
+    setInterval(fetchStatus, 30000); // 30s refresh [web:64]
   </script>
 </body>
 </html>
