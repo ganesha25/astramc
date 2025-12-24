@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AstraMC Network Store</title>
+  <title>AstraMC Network Store - Free Ranks</title>
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,13 +26,13 @@
       </div>
       <div class="brand">
         <h1>AstraMC</h1>
-        <p>Network Store</p>
+        <p>Free Ranks Store</p>
       </div>
     </div>
     <div class="nav-right">
-      <a href="#ranks" class="nav-link">Ranks</a>
-      <a href="#info" class="nav-link">How to Buy</a>
-      <a href="https://github.com/" target="_blank" class="nav-link">GitHub</a>
+      <a href="#ranks" class="nav-link">Free Ranks</a>
+      <a href="#how" class="nav-link">How to Get</a>
+      <a href="#copy-ip" class="nav-link">Copy IP</a>
     </div>
   </header>
 
@@ -40,113 +40,157 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-text">
-        <h2>AstraMC Network Store</h2>
+        <h2>AstraMC Free Ranks</h2>
         <p class="hero-sub">
-          Upgrade your vibes with premium ranks on our <span class="highlight">3D Minecraft</span> server.
-          Orange–red galaxy theme, no pay-to-win pressure.
+          No money needed! Earn premium ranks via <span class="highlight">codes, invites & events</span> 
+          on our Lifesteal + Survival server.
         </p>
         <div class="hero-tags">
-          <span class="tag">IP: <strong>astramc.us.to</strong></span>
-          <span class="tag">Gamemodes: Lifesteal · Survival · Practice</span>
-          <span class="tag">No P2W • Community First</span>
+          <span class="tag copy-ip" id="ip-tag">astramc.us.to</span>
+          <span class="tag">Gamemodes: Lifesteal · Survival</span>
+          <span class="tag">100% FREE • No Paywall</span>
+        </div>
+        <div class="hero-cta">
+          <button class="btn btn-primary" onclick="copyIP()">📋 Copy IP & Join</button>
+          <button class="btn btn-outline" onclick="scrollToRanks()">View Free Ranks</button>
         </div>
       </div>
       <div class="hero-card">
         <div class="hero-card-inner">
-          <p class="hero-label">Featured Rank</p>
+          <p class="hero-label">Top Free Rank</p>
           <h3 class="hero-rank">ASTRA</h3>
-          <p class="hero-desc">Cosmic level flex with max perks, effects and priority everywhere.</p>
-          <button class="btn btn-primary">View Ranks</button>
+          <p class="hero-desc">Earn via Events • Max perks + cosmic effects</p>
         </div>
       </div>
     </section>
 
     <!-- Ranks Section -->
     <section id="ranks" class="ranks-section">
-      <h2 class="section-title">Ranks</h2>
-      <p class="section-sub">
-        Choose your rank. Visual flex, QoL perks, particles and more. Prices are examples – tune later.
-      </p>
+      <h2 class="section-title">Free Ranks System</h2>
+      <p class="section-sub">Koi paise nahi! Simple steps se premium ranks kamao.</p>
 
       <div class="ranks-grid">
         <!-- VIP Rank -->
         <article class="rank-card rank-vip">
           <div class="rank-header">
-            <span class="rank-label">Starter Rank</span>
+            <span class="rank-label">🎁 Starter</span>
             <h3>VIP</h3>
           </div>
-          <p class="rank-price">₹99 / one-time</p>
+          <div class="rank-method">
+            <strong>Discord Code:</strong> <code>/freerank VIPCODE</code>
+          </div>
           <ul class="rank-perks">
-            <li>VIP name color + chat tag</li>
-            <li>Basic /hat, /nick (limited)</li>
-            <li>Join full server access</li>
-            <li>Small loot boosts in crates</li>
+            <li>VIP chat color + prefix</li>
+            <li>/hat, /nick (basic)</li>
+            <li>Full server access</li>
+            <li>Lifesteal loot boost</li>
           </ul>
-          <button class="btn btn-outline">Buy via Discord</button>
+          <button class="btn btn-primary" onclick="scrollToHow()">Get Code → Discord</button>
         </article>
 
         <!-- Eagle Rank -->
         <article class="rank-card rank-eagle">
           <div class="rank-header">
-            <span class="rank-label">Popular</span>
+            <span class="rank-label">⭐ Popular</span>
             <h3>EAGLE</h3>
           </div>
-          <p class="rank-price">₹249 / one-time</p>
+          <div class="rank-method">
+            <strong>Invite 10 Active:</strong> Active tab milega
+          </div>
           <ul class="rank-perks">
-            <li>All VIP perks included</li>
-            <li>Exclusive Eagle tag & particles</li>
+            <li>All VIP + Eagle particles</li>
             <li>/feed, /workbench, /craft</li>
-            <li>Extra homes & RTP cooldown cuts</li>
+            <li>Extra homes + fast RTP</li>
+            <li>Survival priority queue</li>
           </ul>
-          <button class="btn btn-primary">Discord Purchase</button>
+          <button class="btn btn-primary">Invite Friends →</button>
         </article>
 
-        <!-- Astra Rank -->
+        <!-- Astra Rank (VADAPAV?) -->
         <article class="rank-card rank-astra">
           <div class="rank-header">
-            <span class="rank-label">Legendary</span>
+            <span class="rank-label">⚡ Events Only</span>
             <h3>ASTRA</h3>
           </div>
-          <p class="rank-price">₹499 / one-time</p>
+          <div class="rank-method">
+            <strong>Events Winner:</strong> Special Events mein jeeto
+          </div>
           <ul class="rank-perks">
-            <li>All Eagle + VIP perks</li>
-            <li>Cosmic aura, trails & pets</li>
-            <li>Highest queue & support priority</li>
-            <li>Special Astra-only events & crate</li>
+            <li>All Eagle + cosmic aura</li>
+            <li>Pet trails + max priority</li>
+            <li>Exclusive Astra crates</li>
+            <li>Event leader status</li>
           </ul>
-          <button class="btn btn-glow">Contact Staff</button>
+          <button class="btn btn-glow">Watch Events →</button>
         </article>
       </div>
     </section>
 
-    <!-- Info / How to Buy -->
-    <section id="info" class="info-section">
+    <!-- How to Get -->
+    <section id="how" class="info-section">
       <div class="info-card">
-        <h2 class="section-title">How to Purchase</h2>
-        <p class="section-sub">
-          For now, payments are handled safely via staff only. No direct card details on this site.
-        </p>
-        <ol class="info-steps">
-          <li>Join our Discord server (link on main AstraMC banner/site).</li>
-          <li>Open a ticket in <strong>#support</strong> or <strong>#store</strong>.</li>
-          <li>Tell staff your IGN, rank you want (VIP / Eagle / Astra) and gamemode.</li>
-          <li>Staff will share official payment methods & confirm delivery in-game.</li>
-        </ol>
-        <p class="info-note">
-          Never pay anyone outside official AstraMC staff or outside official channels.
-        </p>
+        <h2 class="section-title">Kaise Milega Rank?</h2>
+        
+        <div class="steps-grid">
+          <div class="step-card">
+            <h3>1. VIP Code</h3>
+            <p><strong>Discord join karo → #live-streams dekho → Code milega → Game mein <code>/freerank VIPCODE</code></strong></p>
+          </div>
+          
+          <div class="step-card">
+            <h3>2. Eagle Invite</h3>
+            <p><strong>10 active players ko invite karo → Staff check karega → Eagle tab milega</strong></p>
+          </div>
+          
+          <div class="step-card">
+            <h3>3. Astra Events</h3>
+            <p><strong>Weekly events join → Top rank jeeto → Astra automatic milega</strong></p>
+          </div>
+        </div>
+
+        <div class="info-note">
+          <strong>⚠️ Important:</strong> Sirf official Discord se codes/events. Fake codes mat use karna!
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> AstraMC Network • astramc.us.to • All rights reserved.</p>
-    <p class="footer-small">Hosted via GitHub + Render • Designed for Minecraft players.</p>
+    <p>© <span id="year"></span> AstraMC Network • <span class="copy-ip" id="footer-ip">astramc.us.to</span></p>
+    <p class="footer-small">Lifesteal & Survival • 100% Free Ranks • No Paywall</p>
   </footer>
 
   <script>
     // Auto year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Copy IP function
+    function copyIP() {
+      navigator.clipboard.writeText('astramc.us.to').then(() => {
+        const btn = event.target;
+        const original = btn.innerHTML;
+        btn.innerHTML = '✅ IP Copied!';
+        btn.style.background = '#4ade80';
+        setTimeout(() => {
+          btn.innerHTML = original;
+          btn.style.background = '';
+        }, 2000);
+      });
+    }
+
+    // Scroll functions
+    function scrollToRanks() {
+      document.getElementById('ranks').scrollIntoView({ behavior: 'smooth' });
+    }
+    function scrollToHow() {
+      document.getElementById('how').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Make all IP clickable
+    document.querySelectorAll('.copy-ip').forEach(el => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', copyIP);
+    });
   </script>
 </body>
 </html>
